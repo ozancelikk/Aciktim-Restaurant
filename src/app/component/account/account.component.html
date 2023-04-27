@@ -1,0 +1,191 @@
+<section style="background-color: #eee">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profilim</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img
+              src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
+              alt="avatar"
+              class="img-fluid"
+              style="width: 100%; height: 40rem; object-fit: cover"
+            />
+            <h2 class="my-3">Burger King</h2>
+            <p class="text-muted mb-1">Kayıt Tarihi : asfsf</p>
+            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card mb-4 mb-md-0">
+            <div class="card-body">
+              <h3 style="font-weight: bold">Şifreni Değiştir</h3>
+              <hr />
+              <form>
+                <div class="col-md-12">
+                  <label class="labels">Eski Şifre</label>
+                  <input
+                    formControlName="oldPassword"
+                    type="password"
+                    class="form-control"
+                    placeholder="Eski Şifre"
+                  />
+                </div>
+                <br />
+                <div class="col-md-12">
+                  <label class="labels">Yeni Şifre</label>
+                  <input
+                    type="password"
+                    formControlName="newPassword"
+                    class="form-control"
+                    placeholder="Yeni Şifre"
+                    value=""
+                  />
+                </div>
+                <br />
+                <div class="col-md-12">
+                  <label class="labels">Şifre Tekrarı</label>
+                  <input
+                    type="password"
+                    formControlName="newPassword"
+                    class="form-control"
+                    placeholder="Yeni Şifre Tekrarı"
+                  />
+                </div>
+                <div class="mt-5 text-center">
+                  <button class="btn btn-primary profile-button" type="button">
+                    Şifreyi Değiştir
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3>Bilgilerini Güncelle</h3>
+              <hr />
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="labels">Ad</label
+                  ><input type="text" class="form-control" disabled value="" />
+                </div>
+                <div class="col-lg-6">
+                  <label class="labels">address</label
+                  ><input type="text" class="form-control" disabled value="" />
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-lg-12">
+                  <label class="labels">Email Adresi</label
+                  ><input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    placeholder="Email adresi"
+                  />
+                </div>
+              </div>
+              <form class="mt-1">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="labels" for="form3Example1">Tax No</label>
+                      <input
+                        type="text"
+                        id="form3Example1"
+                        disabled
+                        formControlName="nationalityId"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="labels" for="form3Example2">Tel No</label>
+                      <input
+                        type="text"
+                        id="form3Example7"
+                        formControlName="birthDay"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="labels" for="form3Example2"
+                        >Açılış Saati</label
+                      >
+                      <input
+                        type="text"
+                        id="form3Example2"
+                        placeholder="örn:08.06.2020"
+                        formControlName="registerDate"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="labels" for="form3Example2"
+                        >Kapanış Saati</label
+                      >
+                      <input
+                        type="text"
+                        id="form3Example2"
+                        placeholder="örn:08.06.2020"
+                        formControlName="registerDate"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="labels" for="form3Example3"
+                    >Minimum sepet Tutarı</label
+                  >
+                  <input
+                    type="text"
+                    id="form3Example3"
+                    placeholder="örn:+905437725182"
+                    formControlName="phoneNumber"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="labels" for="form3Example3"
+                      >Resmi Güncelle</label
+                    >
+                    <input
+                      type="file"
+                      id="form3Example3"
+                      formControlName="phoneNumber"
+                      class="form-control"
+                    />
+                  </div>
+                <div class="mt-1 text-center">
+                  <button class="btn btn-primary profile-button" type="button">
+                    Profili Güncelle
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
