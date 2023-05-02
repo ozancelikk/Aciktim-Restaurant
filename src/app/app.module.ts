@@ -13,6 +13,11 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { AccountComponent } from './component/account/account.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,19 @@ import { RegisterComponent } from './component/auth/register/register.component'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      preventDuplicates: false,
+      closeButton: true,
+      countDuplicates: true,
+      positionClass: "toast-bottom-right",
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
