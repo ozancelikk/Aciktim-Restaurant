@@ -8,23 +8,20 @@
             <div class="card-body p-5">
               <h2 class=" text-center mb-5">Giriş Yap</h2>
 
-              <form>
-
-               
-
+              <form [formGroup]="loginForm">
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" formControlName="email" />
                   <label class="form-label" for="form3Example3cg">Email</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" formControlName="password" />
                   <label class="form-label" for="form3Example4cg">Şifre</label>
                 </div>
 
                 <div class="d-flex justify-content-center">
                   <button type="button"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">giriş Yap</button>
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="login()">Giriş Yap</button>
                 </div>
 
                 <p class="text-center text-muted mt-5 mb-0">Hesabın yok mu? <a href="#!"
