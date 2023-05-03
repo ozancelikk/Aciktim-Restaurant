@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatRadioModule,
     MatDialogModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({

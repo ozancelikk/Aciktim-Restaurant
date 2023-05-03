@@ -46,15 +46,15 @@
           <a class="nav-link mx-2 text-uppercase" routerLink="support" routerLink="menuadd">Menü Ekle</a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto ">
+      <!-- <ul class="navbar-nav ms-auto ">
         <li class="nav-item">
           <a class="nav-link mx-2 text-uppercase" routerLink="dashboard"><i class="fa-solid fa-cart-shopping me-1"></i> dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link mx-2 text-uppercase" routerLink="account"><i class="fa-solid fa-circle-user me-1"></i> hesabım</a>
         </li>
-      </ul>
-      <!-- <ul class="navbar-nav ms-auto ">
+      </ul> -->
+      <ul class="navbar-nav ms-auto ">
         <li class="nav-item" *ngIf="isAuthenticated()">
           <a class="nav-link mx-2 text-uppercase" routerLink="cart"><i class="fa-solid fa-cart-shopping me-1"></i> Sepetim</a>
         </li>
@@ -65,12 +65,12 @@
           <a class="nav-link mx-2 text-uppercase" (click)="logout()"><i class="fa-solid fa-right-to-bracket"></i> Çıkış yap</a>
         </li>
         <li class="nav-item" *ngIf="!isAuthenticated()">
-          <a class="nav-link mx-2 text-uppercase" routerLink="auth/login"><i class="fa-solid fa-right-to-bracket"></i> Giriş Yap</a>
+          <a class="nav-link mx-2 text-uppercase" routerLink="login"><i class="fa-solid fa-right-to-bracket"></i> Giriş Yap</a>
         </li>
         <li class="nav-item" *ngIf="!isAuthenticated()">
-          <a class="nav-link mx-2 text-uppercase" routerLink="auth/register"><i class="fa-solid fa-circle-user me-1"></i>Kayıt Ol</a>
+          <a class="nav-link mx-2 text-uppercase" routerLink="register"><i class="fa-solid fa-circle-user me-1"></i>Kayıt Ol</a>
         </li>
-      </ul> -->
+      </ul>
     </div>
   </div>
 </nav>
