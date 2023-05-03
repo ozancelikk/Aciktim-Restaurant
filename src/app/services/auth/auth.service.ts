@@ -21,4 +21,9 @@ export class AuthService {
   login(login:Login):Observable<SingleResponseModel<Token>> {
     return this.httpClient.post<SingleResponseModel<Token>>(this.apiURL + "/Login",login);
   }
+  logout(){
+    localStorage.removeItem("token")
+    localStorage.removeItem("customerId")
+    localStorage.removeItem("expiration")
+  }
 }
