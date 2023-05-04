@@ -6,6 +6,8 @@ import { SingleResponseModel } from 'src/app/models/singleresponseModel';
 
 import { Login } from 'src/app/models/auth/login';
 import { Token } from 'src/app/models/auth/token';
+import { ChangePassword } from 'src/app/models/restaurant/changePassword';
+import { Responsemodel } from 'src/app/models/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +27,8 @@ export class AuthService {
     localStorage.removeItem("token")
     localStorage.removeItem("customerId")
     localStorage.removeItem("expiration")
+  }
+  changePassword(changePassword:ChangePassword):Observable<Responsemodel>{
+    return this.httpClient.post<Responsemodel>(this.apiURL+"/ChangePassword",changePassword);
   }
 }

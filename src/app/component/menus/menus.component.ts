@@ -45,6 +45,8 @@ export class MenusComponent implements OnInit {
         console.log(this.restaurant)
         this.star=response.data.restaurantRate;
         this.rate=new Array(5- Math.floor(this.restaurant.restaurantRate));
+        this.remainderRate=new Array(Math.floor(this.restaurant.restaurantRate))
+        console.log(this.remainderRate)
         this.restaurantImage=response.data.imagePath;
       }
     })
@@ -72,7 +74,6 @@ export class MenusComponent implements OnInit {
     this.restaurantService.getRestaurantCommentsByRestaurantId(this.restaurantId).subscribe(response => {
       if (response.success) {
         this.comments = response.data;
-        console.log(this.comments)
         this.comments = this.comments.reverse();
       }
     })
