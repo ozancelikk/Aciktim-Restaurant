@@ -16,11 +16,11 @@
               </p>
               <p><i class="fa-solid fa-clock"></i> 06.00 / 22.00</p>
 
-              <p>Restoran Puanı:
-                <i class="fa-solid fa-star stars" *ngFor="let x of rate"></i>
-                <i class="fa-solid fa-star remainderRateColor" *ngFor="let x of remainderRate"></i>
-
+              <p *ngIf="restaurant.restaurantRate!=0 ">Restoran Puanı:
+                <i class="fa-solid fa-star remainderRateColor" *ngFor="let x of rate"></i>
+                <i class="fa-solid fa-star stars " *ngFor="let x of remainderRate"></i>
               </p>
+              <p *ngIf="restaurant.restaurantRate==0" style="color: #5e196b; font-weight: bold;">Henüz Puanlanlama Yaplımamıştır</p>
             </div>
             <div class="col-md-6">
               <p><i class="fa-solid fa-envelope"></i> {{restaurant.mailAddress}}</p>
@@ -150,156 +150,6 @@
   </div>
 </div>
 
-<!-- <div class="container">
-    <img class="mb-4" src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45" style="width: 100%;height: 35rem; object-fit: cover;" alt="">
-    <h2 style="text-align: center; font-weight: bold; color: #5D196A;" class="mb-5">Burger King <a href=""><i class="fa-solid fa-pen" style="font-size: 1rem; color:  #5D196A;" href></i></a></h2>
-    <div class="d-flex" style="justify-content: space-around;"> 
-        <div class="">
-          <p><i class="fa-solid fa-house"></i>
-            inönü mah hakan caddesi
-          </p>
-          <p><i class="fa-solid fa-clock"></i> 06.00 / 22.00</p>
-
-          <p>Restoran Puanı:
-            <i class="fa-solid fa-star stars" ></i>
-            <i class="fa-solid fa-star stars" ></i>
-            <i class="fa-solid fa-star stars" ></i>
-            <i class="fa-solid fa-star stars" ></i>
-            <i class="fa-solid fa-star remainderRateColor"></i>
-
-          </p>
-        </div>
-        <div class="">
-          <p><i class="fa-solid fa-envelope"></i> info@burgerking.com</p>
-          <p><i class="fa-solid fa-phone"></i> 0212 658 85 85</p>
-        </div>
-      </div>
-    <h2>Menüler</h2>
-    <div class="row">
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">Steak House</p>
-                        <p class="card-price">120 TL</p>
-                    </div>
-                    <p>Menü Açıklaması</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item mb-3" style="position: relative;cursor: pointer;" routerLink="/menuadd">
-            <div class="card">
-                <img class="card-img-top"
-                    src="https://emojigraph.org/media/openmoji/plus_2795.png"
-                    style="height: 17rem; width: 100%; max-height: 17rem" alt="Card image cap" />
-                <div class="card-body">
-                    <h4 class="card-title" style="font-weight: bold"></h4>
-                    <div class="d-flex justify-content-center">
-                        <p class="card-text" >Menü Ekle</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</div> -->
 
 <!-- 
 <div class="row mb-3">

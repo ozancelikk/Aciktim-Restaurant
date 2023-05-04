@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
       restaurantAddress:["",Validators.required],
       restaurantName:["",Validators.required],
       taxNumber:["",Validators.required],
+      image:["",Validators.required]
     })
   }
 

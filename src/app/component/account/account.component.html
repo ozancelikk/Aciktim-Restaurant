@@ -33,7 +33,7 @@
             <div class="card-body">
               <h3 style="font-weight: bold">Şifreni Değiştir</h3>
               <hr />
-              <form>
+              <form [formGroup]="changePasswordForm">
                 <div class="col-md-12">
                   <label class="labels">Eski Şifre</label>
                   <input
@@ -65,7 +65,7 @@
                   />
                 </div>
                 <div class="mt-5 text-center">
-                  <button class="btn btn-primary profile-button" type="button">
+                  <button class="btn btn-primary profile-button" type="button" (click)="changePassword()">
                     Şifreyi Değiştir
                   </button>
                 </div>
@@ -73,7 +73,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
           <div class="card mb-4">
             <div class="card-body">
               <h3>Bilgilerini Güncelle</h3>
@@ -183,7 +183,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

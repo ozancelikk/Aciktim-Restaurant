@@ -19,6 +19,7 @@ import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule} from '@angular/material/radio';
+import { OrderCustomerIdPipe } from './pipes/order-customer-id.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatRadioModule} from '@angular/material/radio';
     AccountComponent,
     LoginComponent,
     RegisterComponent,
+    OrderCustomerIdPipe,
   ],
   imports: [
     BrowserModule,
