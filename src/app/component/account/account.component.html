@@ -1,4 +1,4 @@
-<section style="background-color: #eee">
+<section style="background-color: #eee" *ngIf="restaurant">
   <div class="container py-5">
     <div class="row">
       <div class="col">
@@ -16,14 +16,13 @@
         <div class="card mb-4">
           <div class="card-body text-center">
             <img
-              src="https://images.deliveryhero.io/image/fd-tr/LH/kuk6-hero.jpg?width=480&height=360&quality=45"
+              [src]="getImagePath(restaurant)"
               alt="avatar"
               class="img-fluid"
               style="width: 100%; height: 40rem; object-fit: cover"
             />
-            <h2 class="my-3">Burger King</h2>
-            <p class="text-muted mb-1">Kayıt Tarihi : asfsf</p>
-            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+            <h2 class="my-3">{{restaurant.restaurantName}}</h2>
+            <p class="text-muted mb-1">Kayıt Tarihi : {{restaurant.registerDate}}</p>
           </div>
         </div>
       </div>
@@ -31,7 +30,7 @@
         <div class="col-lg-6">
           <div class="card mb-4 mb-md-0">
             <div class="card-body">
-              <h3 style="font-weight: bold">Şifreni Değiştir</h3>
+              <h3 style="font-weight: bold; color: #5D196A;">Şifreni Değiştir</h3>
               <hr />
               <form [formGroup]="changePasswordForm">
                 <div class="col-md-12">
@@ -73,19 +72,19 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="restaurant">
           <div class="card mb-4">
             <div class="card-body">
-              <h3>Bilgilerini Güncelle</h3>
+              <h3 style="font-weight: bold; color: #5D196A;">Hesabım</h3>
               <hr />
               <div class="row">
                 <div class="col-lg-6">
                   <label class="labels">Ad</label
-                  ><input type="text" class="form-control" disabled value="" />
+                  ><input type="text" class="form-control" disabled value="{{restaurant.restaurantName}}" />
                 </div>
                 <div class="col-lg-6">
                   <label class="labels">address</label
-                  ><input type="text" class="form-control" disabled value="" />
+                  ><input type="text" class="form-control" disabled value="{{restaurant.restaurantAddress}}" />
                 </div>
               </div>
               <div class="row mt-1">
@@ -96,6 +95,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Email adresi"
+                    value="{{restaurant.mailAddress}}"
                   />
                 </div>
               </div>
@@ -105,10 +105,11 @@
                     <div class="form-outline">
                       <label class="labels" for="form3Example1">Tax No</label>
                       <input
+                        disabled
                         type="text"
                         id="form3Example1"
-                        formControlName="nationalityId"
                         class="form-control"
+                        value="{{restaurant.taxNumber}}"
                       />
                     </div>
                   </div>
@@ -116,10 +117,11 @@
                     <div class="form-outline">
                       <label class="labels" for="form3Example2">Tel No</label>
                       <input
+                        disabled
                         type="text"
                         id="form3Example7"
-                        formControlName="birthDay"
                         class="form-control"
+                        value="{{restaurant.phoneNumber}}"
                       />
                     </div>
                   </div>
@@ -129,11 +131,12 @@
                         >Açılış Saati</label
                       >
                       <input
+                        disabled
                         type="text"
                         id="form3Example2"
                         placeholder="örn:08.06.2020"
-                        formControlName="registerDate"
                         class="form-control"
+                        value="{{restaurant.openingTime}}"
                       />
                     </div>
                   </div>
@@ -144,10 +147,11 @@
                       >
                       <input
                         type="text"
+                        disabled
                         id="form3Example2"
                         placeholder="örn:08.06.2020"
-                        formControlName="registerDate"
                         class="form-control"
+                        value="{{restaurant.closingTime}}"
                       />
                     </div>
                   </div>
@@ -158,32 +162,29 @@
                   >
                   <input
                     type="text"
+                    disabled
                     id="form3Example3"
                     placeholder="örn:+905437725182"
-                    formControlName="phoneNumber"
                     class="form-control"
+                    value="{{restaurant.minCartPrice}}"
                   />
                 </div>
-                <div class="form-outline mb-4">
-                    <label class="labels" for="form3Example3"
-                      >Resmi Güncelle</label
-                    >
-                    <input
-                      type="file"
-                      id="form3Example3"
-                      formControlName="phoneNumber"
-                      class="form-control"
-                    />
-                  </div>
-                <div class="mt-1 text-center">
-                  <button class="btn btn-primary profile-button" type="button">
-                    Profili Güncelle
-                  </button>
-                </div>
               </form>
+              <div class="form-outline mb-4">
+                <label class="labels" for="form3Example3"
+                  >Resmi Güncelle</label
+                >
+                <input
+                (change)="onChange($event)"
+                  type="file"
+                  id="form3Example3"
+                  class="form-control"
+                />
+                <button class="btn btn-success" (click)="updateImage()">Güncelle</button>
+              </div>
             </div>
           </div>
-        </div> -->
+        </div> 
       </div>
     </div>
   </div>

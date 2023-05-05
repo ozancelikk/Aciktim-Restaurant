@@ -7,8 +7,10 @@ export interface RestaurantDto {
     closingTime:string;
     categoryId:string;
     minCartPrice:number;
+    taxNumber:string
     restaurantRate:number;
     imagePath:string;
     phoneNumber:string;
+    registerDate:string;
  
 }

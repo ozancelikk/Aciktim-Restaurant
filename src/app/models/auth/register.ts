@@ -9,4 +9,5 @@ export interface Register{
    restaurantAddress:string;
    restaurantName:string;
    taxNumber:string;
+   registerDate:string
 }

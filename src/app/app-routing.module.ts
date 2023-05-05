@@ -10,7 +10,8 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 
 const routes: Routes = [
-  {path:"",pathMatch:"full",component:HomeComponent,children:[
+  {path:"",pathMatch:"full",component:LoginComponent},
+  {path:"home",component:HomeComponent,children:[
     {path:"",component:MenusComponent},
     // {path:"",component:SliderComponent},
   ]},
