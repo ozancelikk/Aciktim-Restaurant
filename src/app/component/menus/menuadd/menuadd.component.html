@@ -5,28 +5,28 @@
 
 <section class="get-in-touch">
    <h1 class="title">Menü Ekle</h1>
-   <form class="contact-form row">
+   <form class="contact-form row" [formGroup]="addMenuForm">
       <div class="form-field col-lg-6">
-         <input id="name" class="input-text js-input " type="text" required>
+         <input id="name" class="input-text js-input " type="text" required formControlName="menuTitle">
          <label class="label mb-4" for="name">Menü Adı</label>
       </div>
       <div class="form-field col-lg-6 ">
-         <input id="email" class="input-text js-input" type="email" required>
+         <input id="email" class="input-text js-input" type="email" required formControlName="menuPrice">
          <label class="label mb-4" for="email">Fiyatı</label>
       </div>
       <div class="form-field col-lg-6 ">
-         <input id="company" class="input-text js-input" type="text" required>
+         <input id="company" class="input-text js-input" type="text" required formControlName="menuDescription">
          <label class="label mb-4" for="company">Menü Açıklaması</label>
       </div>
        <div class="form-field col-lg-6 ">
         <label class="label image " for="company">Menü Resmi</label>
-        <input id="phone"  class="input-text js-input " type="file" required>
+        <input id="phone"  class="input-text js-input " type="file" required (change)="onChange($event)">
       </div>
       <div class="form-field col-lg-6">
         
       </div>
       <div class="form-field col-lg-12">
-         <input class="submit-btn" type="submit" value="Submit">
+         <input class="submit-btn" type="submit" value="Submit" (click)="addMenu()">
       </div>
    </form>
 </section>

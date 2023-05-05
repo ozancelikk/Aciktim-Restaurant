@@ -17,8 +17,9 @@
               <p><i class="fa-solid fa-clock"></i> 06.00 / 22.00</p>
 
               <p *ngIf="restaurant.restaurantRate!=0 ">Restoran Puanı:
-                <i class="fa-solid fa-star remainderRateColor" *ngFor="let x of rate"></i>
                 <i class="fa-solid fa-star stars " *ngFor="let x of remainderRate"></i>
+                <i class="fa-solid fa-star  remainderRateColor" *ngFor="let x of rate"></i>
+                
               </p>
               <p *ngIf="restaurant.restaurantRate==0" style="color: #5e196b; font-weight: bold;">Henüz Puanlanlama Yaplımamıştır</p>
             </div>
@@ -66,7 +67,7 @@
       </div>
     </div>
     
-    <div class="mt-100 mb-100">
+    <div class="mt-100 mb-100 ">
       <div class="row">
         <div class="col-md-12">
           <h2>Restoran Yorumları</h2>
@@ -74,14 +75,14 @@
           <div class="alert alert-success" role="alert" *ngIf="comments.length == 0">
             Bu restorana daha önce hiç yorum yapılmamış!
           </div>
-          <div class="card w-100" *ngIf="comments.length > 0">
+          <div class="card w-100 p-1" *ngIf="comments.length > 0">
             <div class="comment-widgets m-b-20">
               <div class="d-flex flex-row comment-row w-100" *ngFor="let comment of comments">
                 <div class="p-2"><span class="round"><img
                       src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1"
                       alt="user" width="50"></span></div>
                 <div class="comment-text w-100">
-                  <h4 style="margin-bottom: .3rem;">{{comment.customerName}}</h4>
+                  <h4 style="margin-bottom: .3rem;">{{comment.customerName.slice(0,1)}}*****</h4>
                   <div class="comment-footer mb-2">
                     <div class="d-flex justify-content-between">
                       <div>
@@ -97,52 +98,10 @@
                   <p class="m-b-5 m-t-10">
                     <b> İçerik :</b> {{comment.commentContent}}
                   </p>
+                  <hr>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card  py-3 px-3" style="background-color: #f8f9fa;margin-top: 3rem;">
-            <div class="d-flex flex-start w-100">
-              <div class="form-outline w-100">
-                <h2>Yorum Yap</h2>
-                <hr>
-                <!-- <form [formGroup]="addCommentForm">
-                  <div class="container d-flex justify-content-start mb-3">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="stars">
-                          <span style="color: black;">Puanınız : </span>
-                          <select style="width: 6rem;" formControlName="restaurantRate">
-                            <option value="5">5 </option>
-                            <option value="4">4 </option>
-                            <option value="3">3 </option>
-                            <option value="2">2 </option>
-                            <option value="1">1 </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="exampleInputEmail1">Yorum Başlığı</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Başlık..." formControlName="commentTitle">
-                  </div>
-                  <div class="form-group">
-                    <label>Yorum İçeriği</label>
-                    <textarea class="form-control" id="textAreaExample" rows="4" placeholder="İçerik..."
-                      style="background: #fff;" formControlName="commentContent"></textarea>
-                  </div>
-                  <div class="float-end mt-2 pt-1">
-                    <button type="button" class="btn btn-md" (click)="addComment()"
-                      style="background-color: #5D196A;color: white;margin-right: 10px;">Yorum Yap</button>
-                    <input type="reset" value="İptal" class="btn btn-md"
-                      style="background-color: #5D196A;color: white;margin-right: 10px;" />
-                  </div>
-                </form> -->
-              </div>
-            </div>
-
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { RestaurantImageService } from 'src/app/services/restaurant/restaurant-image.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,10 @@ export class RegisterComponent implements OnInit {
   password:string
   verifyPassword:string;
   isChecked:boolean;
-  constructor(private toastrService:ToastrService,private authService:AuthService, private formBuilder:FormBuilder,private router:Router,){}
+  images: any;
+  restaurantId:any;
+  file: File;
+  constructor(private toastrService:ToastrService,private authService:AuthService, private formBuilder:FormBuilder,private router:Router,private restaurantImageService:RestaurantImageService){}
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -31,16 +35,31 @@ export class RegisterComponent implements OnInit {
       restaurantAddress:["",Validators.required],
       restaurantName:["",Validators.required],
       taxNumber:["",Validators.required],
-      image:["",Validators.required]
+      registerDate:[new Date().toLocaleDateString(),Validators.required],
     })
   }
 
   register(){
+    let model = Object.assign({},this.registerForm.value);
+    console.log(model);
+    
     if (this.registerForm.valid) {
-      let model = Object.assign({},this.registerForm.value);
       if (this.password==this.verifyPassword) {
         if (this.isChecked) {
           this.authService.register(model).subscribe(response=>{
+            this.restaurantId=response.data;
+            console.log(response.data);
+            
+            if (this.file!=null) {
+              setTimeout(() => {
+                let model2={
+                  restaurantId:response.data.restaurantId,
+                  image:this.file
+                }
+                this.restaurantImageService.addImage(model2).subscribe(response=>{
+                });
+              }, 2000);
+            }
             this.toastrService.info("Başvurunuz alınmıştır geri dönüş maili en yakın sürede gelecektir.")
             setTimeout(() => {
               this.router.navigate(["login"]);
@@ -61,5 +80,9 @@ export class RegisterComponent implements OnInit {
 
   toggleEditable() {
     this.isChecked = !this.isChecked;
+  }
+
+  onChange(event:any) {
+    this.file = event.target?.files[0];
   }
 }

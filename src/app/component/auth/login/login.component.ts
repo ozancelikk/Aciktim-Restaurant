@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token",response.data.token);
           this.toastrService.success("Giriş Başarılı","BAŞARILI");
           setTimeout(() => {
-            this.router.navigate(["/"])
+            this.router.navigate(["/home"])
           }
             , 500);
         }

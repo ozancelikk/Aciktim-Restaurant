@@ -8,12 +8,15 @@ import { Login } from 'src/app/models/auth/login';
 import { Token } from 'src/app/models/auth/token';
 import { ChangePassword } from 'src/app/models/restaurant/changePassword';
 import { Responsemodel } from 'src/app/models/responseModel';
+import { Restaurant } from 'src/app/models/restaurant/restaurant';
+import { RestaurantDto } from 'src/app/models/restaurant/restaurantDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   apiURL:string="https://localhost:44361/api/Auth"
+  apiURL2:string = "https://localhost:44361/api/Restaurant";
 
   constructor(private httpClient:HttpClient) { }
 
@@ -23,9 +26,12 @@ export class AuthService {
   login(login:Login):Observable<SingleResponseModel<Token>> {
     return this.httpClient.post<SingleResponseModel<Token>>(this.apiURL + "/Login",login);
   }
+  getById(id:string):Observable<SingleResponseModel<RestaurantDto>>{
+    return this.httpClient.get<SingleResponseModel<RestaurantDto>>(this.apiURL2+"/getdetailsdtobyid?id="+id)
+  }
   logout(){
     localStorage.removeItem("token")
-    localStorage.removeItem("customerId")
+    localStorage.removeItem("restaurantId")
     localStorage.removeItem("expiration")
   }
   changePassword(changePassword:ChangePassword):Observable<Responsemodel>{
