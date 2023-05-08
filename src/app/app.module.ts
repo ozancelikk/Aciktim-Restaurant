@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule} from '@angular/material/radio';
 import { OrderCustomerIdPipe } from './pipes/order-customer-id.pipe';
+import { ChartModule } from 'angular-highcharts';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RestaurantApplicationComponent } from './component/restaurant-application/restaurant-application.component';
 import { OrderComponent } from './component/order/order.component';
 
@@ -44,9 +46,11 @@ import { OrderComponent } from './component/order/order.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ChartModule,
     BrowserAnimationsModule,
     FormsModule,
     MatRadioModule,
+    DragDropModule,
     MatDialogModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
