@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from 'src/app/models/listReponseModel';
 import { Order } from 'src/app/models/order/order';
+import { OrderDictionary } from 'src/app/models/order/orderDictionary';
 import { Responsemodel } from 'src/app/models/responseModel';
 
 @Injectable({
@@ -26,6 +27,9 @@ export class OrderService {
   }
   chanceOrderStatusToComplete(order:Order):Observable<Responsemodel>{
     return this.httpClient.post<Responsemodel>(this.apiUrl+"/ChangeOrderStatusToComplete",order);
+  }
+  getOrdersByRestaurantId(restaurantId:string):Observable<ListResponseModel<OrderDictionary>>{
+    return this.httpClient.get<ListResponseModel<OrderDictionary>>(this.apiUrl+"/OrderMenusByRestaurantId?restaurantId="+restaurantId)
   }
 
   

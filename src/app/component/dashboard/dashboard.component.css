@@ -1,0 +1,56 @@
+.resizable {
+    resize: both;
+    overflow: hidden;
+  
+  }
+  
+  .chart {
+    width: 100%;
+    height: 500px;
+  }
+  
+  
+  .example-box {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: auto;
+  }
+  
+  
+  .open:hover {
+    transition: 1s all;
+    scale: 1.10;
+  }
+  
+  .example-boundary {
+    width: 400px;
+    height: 400px;
+    max-width: 100%;
+   
+   border: dotted #ccc 2px;
+  }
+  .card {
+    border-left: 0.25rem solid #5D196A!important;
+    padding: 1.25rem;
+  }
+  
+  .text-xs {
+    font-size: .7rem;
+  }
+  
+  .text-primary {
+    color: #5D196A!important;
+  }
+  .font-weight-bold {
+    font-weight: 700!important;
+  }
+  .text-uppercase {
+     text-transform: uppercase!important; 
+  }
+  .text-gray-800 {
+    color: #5a5c69!important;
+  }

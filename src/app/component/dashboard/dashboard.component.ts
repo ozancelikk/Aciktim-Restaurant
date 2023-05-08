@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 import { ToastrService } from 'ngx-toastr';
 import { Order } from 'src/app/models/order/order';
+import { OrderDictionary } from 'src/app/models/order/orderDictionary';
 import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { OrderService } from 'src/app/services/order/order.service';
 import { RestaurantService } from 'src/app/services/restaurant/restaurant.service';
@@ -20,6 +21,8 @@ export class DashboardComponent implements OnInit {
   todayGain:number=0;
   restaurantActiveOrders:number=0;
   totalOrderNumber:number=0
+  topOrderMenus:OrderDictionary[];
+  pieChart:any
 
 
   constructor(private orderService: OrderService, private toastrService: ToastrService,private restaurantService: RestaurantService) { }
@@ -27,6 +30,7 @@ export class DashboardComponent implements OnInit {
     this.getRestaurantId();
     this.calculateTodayGain();
     this.getRestaurantActiveOrders();
+    this.createPieChartForTopOrderMenus();
   }
 
   getRestaurantId(){
@@ -56,8 +60,6 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  
-
   calculateTodayGain() {
     const date = new Date();
     const day = ("0" + date.getDate()).slice(-2);
@@ -65,7 +67,6 @@ export class DashboardComponent implements OnInit {
     const year = date.getFullYear();
     const formattedDate = `${day}.${month}.${year}`;
     this.getRestaurantPassiveOrders(() => {
-      console.log(this.restaurantOrders);
       for (let i = 0; i < this.restaurantOrders.length; i++) {
         let split2 = this.restaurantOrders[i].orderDate.split(/[,\s]+/)[0];
         if (split2==formattedDate) {
@@ -80,6 +81,59 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+  getTopOrderMenus(successCallBack?:()=>void){
+    this.orderService.getOrdersByRestaurantId(this.restaurantId).subscribe(response=>{
+      response.success ? this.topOrderMenus=response.data:this.toastrService.error("Bir Hata Meydana Geldi","Hata")
+      if (successCallBack) {
+        successCallBack();
+      }
+    })
+  }
+
+  createPieChartForTopOrderMenus(){
+    this.getTopOrderMenus(() => {
+      let data = [];
+      for (let i = 0; i < this.topOrderMenus.length; i++) {
+        data.push([this.topOrderMenus[i].menuName, this.topOrderMenus[i].quantity]);
+      }
+      console.log(data);
+      
+      this.pieChart = new Chart
+        (
+          {
+            chart: {
+              plotBorderWidth: null,
+              plotShadow: false
+            },
+            accessibility: {
+              enabled: false
+            },
+            title: {
+              text: 'En çok Sipariş Alan Menüler'
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                shadow: false,
+                center: ['50%', '50%'],
+                size: '85%',
+                innerSize: '20%'
+              }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Satış Oranı',
+              data: data
+            }
+            ]
+          }
+        )
+    })
+  }
+
  
   changeVisibility() {
     this.noShow = !this.noShow
