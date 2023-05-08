@@ -37,4 +37,16 @@ export class AuthService {
   changePassword(changePassword:ChangePassword):Observable<Responsemodel>{
     return this.httpClient.post<Responsemodel>(this.apiURL+"/ChangePassword",changePassword);
   }
+  isAuthenticated() {
+    if(localStorage.getItem('restaurantId')) {
+      return true;
+    }
+    return false;
+  }
+  isStatusTrue() {
+    if(localStorage.getItem('status')=='true') {
+      return true;
+    }
+    return false;
+  }
 }

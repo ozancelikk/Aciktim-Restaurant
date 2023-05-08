@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(private authService:AuthService,private router:Router,private toastrService:ToastrService){}
   logout(){
     this.authService.logout();
+    localStorage.removeItem("status")
     this.router.navigate(["/login"]);
     this.toastrService.success("Başarıyla Çıkış Yapıldı","BAŞARILI")
   }

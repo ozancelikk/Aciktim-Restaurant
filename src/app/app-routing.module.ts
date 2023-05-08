@@ -8,19 +8,25 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { AccountComponent } from './component/account/account.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
+import { AuthGuardGuard } from './guard/auth-guard.guard';
+import { StatusGuardGuard } from './guard/status-guard.guard';
+import { RestaurantApplicationComponent } from './component/restaurant-application/restaurant-application.component';
+import { OrderComponent } from './component/order/order.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:LoginComponent},
-  {path:"home",component:HomeComponent,children:[
-    {path:"",component:MenusComponent},
+  {path:"home",component:HomeComponent,canActivate:[AuthGuardGuard,StatusGuardGuard],children:[
+    {path:"",component:MenusComponent ,canActivate:[AuthGuardGuard,StatusGuardGuard]},
     // {path:"",component:SliderComponent},
   ]},
-  {path:"menuadd",component:MenuaddComponent},
-  {path:"support",component:SupportComponent},
-  {path:"dashboard",component:DashboardComponent},
-  {path:"account",component:AccountComponent},
-  {path:"login",component:LoginComponent},
+  {path:"menuadd",component:MenuaddComponent ,canActivate:[AuthGuardGuard,StatusGuardGuard]},
+  {path:"support",component:SupportComponent ,canActivate:[AuthGuardGuard,StatusGuardGuard]},
+  {path:"dashboard",component:DashboardComponent ,canActivate:[AuthGuardGuard,StatusGuardGuard]},
+  {path:"account",component:AccountComponent ,canActivate:[AuthGuardGuard,StatusGuardGuard]},
+  {path:"login",component:LoginComponent },
   {path:"register",component:RegisterComponent},
+  {path:"restaurantApplication",component:RestaurantApplicationComponent},
+  {path:"order",component:OrderComponent,canActivate:[AuthGuardGuard,StatusGuardGuard]},
 ];
 
 @NgModule({

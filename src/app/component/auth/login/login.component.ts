@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
         if (response.success) {
           localStorage.setItem("restaurantId",response.data.restaurantId);
           localStorage.setItem("token",response.data.token);
+          localStorage.setItem("status",response.data.status.toString());
           this.toastrService.success("Giriş Başarılı","BAŞARILI");
           setTimeout(() => {
             this.router.navigate(["/home"])
@@ -44,8 +45,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logout(){
-    
-  }
+ 
 
 }

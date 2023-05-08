@@ -27,4 +27,6 @@ export class OrderService {
   chanceOrderStatusToComplete(order:Order):Observable<Responsemodel>{
     return this.httpClient.post<Responsemodel>(this.apiUrl+"/ChangeOrderStatusToComplete",order);
   }
+
+  
 }

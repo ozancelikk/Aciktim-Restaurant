@@ -1,0 +1,15 @@
+.receive ,.evaluation,.approvet{
+    height: 45rem;
+    width: 40rem;
+    background-color: #5e196b;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+    color: white;  
+}
+.img{
+    height: 30rem;
+}
+.text{
+    height: 15rem;
+    text-align: justify;
+}
