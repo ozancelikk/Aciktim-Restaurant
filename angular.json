@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "highcharts"
+           ],
             "outputPath": "dist/aciktim-restoran",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,7 +36,10 @@
               
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"  
+              "src/assets/popper.min.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/jquery/dist/jquery.slim.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
