@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule} from '@angular/material/radio';
 import { OrderCustomerIdPipe } from './pipes/order-customer-id.pipe';
+import { RestaurantApplicationComponent } from './component/restaurant-application/restaurant-application.component';
+import { OrderComponent } from './component/order/order.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { OrderCustomerIdPipe } from './pipes/order-customer-id.pipe';
     LoginComponent,
     RegisterComponent,
     OrderCustomerIdPipe,
+    RestaurantApplicationComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
