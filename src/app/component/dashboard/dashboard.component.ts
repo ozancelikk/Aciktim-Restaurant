@@ -4,6 +4,7 @@ import { Chart } from 'angular-highcharts';
 import { ToastrService } from 'ngx-toastr';
 import { Order } from 'src/app/models/order/order';
 import { OrderDictionary } from 'src/app/models/order/orderDictionary';
+import { OrdersByDate } from 'src/app/models/order/ordersByDate';
 import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { OrderService } from 'src/app/services/order/order.service';
 import { RestaurantService } from 'src/app/services/restaurant/restaurant.service';
@@ -23,14 +24,22 @@ export class DashboardComponent implements OnInit {
   totalOrderNumber:number=0
   topOrderMenus:OrderDictionary[];
   pieChart:any
-
+  todayOrders: OrdersByDate;
+  yesterdayOrders: OrdersByDate;
+  piechartorder: any;
+  orders: Order[];
+  profitByMonths: number[] = [0, 0, 0, 0];
+  linechart: any;
 
   constructor(private orderService: OrderService, private toastrService: ToastrService,private restaurantService: RestaurantService) { }
   ngOnInit(): void {
     this.getRestaurantId();
+    this.createLineChart();
     this.calculateTodayGain();
     this.getRestaurantActiveOrders();
     this.createPieChartForTopOrderMenus();
+    this.createPieChartForOrders();
+    this.splitProfitByMonths();
   }
 
   getRestaurantId(){
@@ -97,7 +106,6 @@ export class DashboardComponent implements OnInit {
       for (let i = 0; i < this.topOrderMenus.length; i++) {
         data.push([this.topOrderMenus[i].menuName, this.topOrderMenus[i].quantity]);
       }
-      console.log(data);
       
       this.pieChart = new Chart
         (
@@ -134,6 +142,122 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  getOrdersByDate(successCallBack?: () => void) {
+    this.orderService.getTodayOrdersByRestaurantId(this.restaurantId).subscribe(response => {
+      response.success ? this.todayOrders = response.data : this.toastrService.error("Bir hata meydana geldi", "HATA")
+
+      this.orderService.getYesterdayOrdersByRestaurantId(this.restaurantId).subscribe(response => {
+        response.success ? this.yesterdayOrders = response.data : this.toastrService.error("Bir hata meydana geldi", "HATA")
+        if (successCallBack) {
+          successCallBack();
+        }
+      })
+    })
+  }
+
+  createPieChartForOrders() {
+    this.getOrdersByDate(() => {
+      let data = [];
+      data.push([this.todayOrders.date + " (Bugün)", this.todayOrders.count]);
+      data.push([this.yesterdayOrders.date + " (Dün)", this.yesterdayOrders.count]);
+
+      this.piechartorder = new Chart
+        (
+          {
+            chart: {
+              plotBorderWidth: null,
+              plotShadow: false
+            },
+            accessibility: {
+              enabled: false
+            },
+            title: {
+              text: 'Dün VS Bugün Satış Sayıları'
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                shadow: false,
+                center: ['50%', '50%'],
+                size: '85%',
+                innerSize: '20%'
+              }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Satış Oranı',
+              data: data
+            }
+            ]
+          }
+        )
+    })
+  }
+
+  createLineChart() {
+    this.splitProfitByMonths(() => {
+      this.linechart = new Chart({
+        chart: {
+          type: 'line'
+        },
+        yAxis: {
+          title: {
+            text: "Kazanılan Miktar  (TL)", style: { fontSize: "20" }
+          }
+        },
+        accessibility: {
+          enabled: false
+        },
+        title: {
+          text: 'Gelir Grafiği'
+        },
+        credits: {
+          enabled: false
+        },
+        xAxis: {
+          title: {
+            text: "Aylar", style: { fontSize: "20" }
+          },
+          categories: ["Ocak-Mart", "Nisan-Haziran", "Temmuz-Eylül", "Ekim-Aralık"]
+        },
+        series: [{
+          name: 'Line 1',
+          data: [this.profitByMonths[0], this.profitByMonths[1], this.profitByMonths[2], this.profitByMonths[3]],
+          type: undefined
+        }]
+      });
+    });
+
+  }
+
+  splitProfitByMonths(successCallBack?: () => void) {
+    this.getRestaurantPassiveOrders(() => {    
+      for (let i = 0; i < this.restaurantOrders.length; i++) {
+        const ay = this.restaurantOrders[i].orderDate.split('.')
+        let ayNumber=parseInt(ay[1])
+        for (let j = 0; j < this.restaurantOrders[i].menus.length; j++) {
+          let price = (((this.restaurantOrders[i].menus[j].orderPrice) * (this.restaurantOrders[i].menus[j].quantity)) * 10) / 100
+          if (0 < ayNumber && ayNumber <= 3) {
+            this.profitByMonths[0] += price;
+          }
+          else if (4 <= ayNumber && ayNumber <= 6) {
+            this.profitByMonths[1] += price;
+          }
+          else if (7 <= ayNumber && ayNumber <= 9) {
+            this.profitByMonths[2] += price;
+          }
+          else {
+            this.profitByMonths[3] += price;
+          }
+        }
+      }
+      if (successCallBack) {
+        successCallBack();
+      }
+    })
+  }
  
   changeVisibility() {
     this.noShow = !this.noShow

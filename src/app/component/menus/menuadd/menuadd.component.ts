@@ -52,6 +52,8 @@ export class MenuaddComponent implements OnInit {
                   menuId:this.menuId,
                   image:this.file
                 }
+                console.log(model2);
+                
                 this.menuImageService.addImage(model2).subscribe(response => {
                 })
               }, 2000) 

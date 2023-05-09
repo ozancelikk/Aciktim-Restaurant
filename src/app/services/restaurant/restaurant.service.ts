@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from 'src/app/models/listReponseModel';
+import { Responsemodel } from 'src/app/models/responseModel';
+import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { RestaurantComment } from 'src/app/models/restaurant/restaurantComment';
 import { RestaurantDto } from 'src/app/models/restaurant/restaurantDto';
 import { RestaurantMenu } from 'src/app/models/restaurant/restaurantMenu';
@@ -25,6 +27,12 @@ export class RestaurantService {
   }
   getRestaurantDetails(restaurantId:string):Observable<SingleResponseModel<RestaurantDto>>{
     return this.httpClient.get<SingleResponseModel<RestaurantDto>>(this.apiURL+"/getdetailsdtobyid?id="+restaurantId);
+  }
+  changeRestaurantStatusActive(restaurant:RestaurantDto):Observable<Responsemodel>{
+    return this.httpClient.post<Responsemodel>(this.apiURL+"/ChangeRestaurantActiveStatus",restaurant);
+  }
+  changeRestaurantStatusPassive(restaurant:RestaurantDto):Observable<Responsemodel>{
+    return this.httpClient.post<Responsemodel>(this.apiURL+"/ChangeRestaurantPassiveStatus",restaurant);
   }
   
 }

@@ -14,7 +14,7 @@
               <p><i class="fa-solid fa-house"></i>
                 {{restaurant.restaurantAddress.charAt(0).toUpperCase() + restaurant.restaurantAddress.slice(1)}}
               </p>
-              <p><i class="fa-solid fa-clock"></i> 06.00 / 22.00</p>
+              <p><i class="fa-solid fa-clock"></i> {{restaurant.openingTime}} / {{restaurant.closingTime}}</p>
 
               <p *ngIf="restaurant.restaurantRate!=0 ">Restoran Puanı:
                 <i class="fa-solid fa-star stars " *ngFor="let x of remainderRate"></i>
@@ -26,6 +26,9 @@
             <div class="col-md-6">
               <p><i class="fa-solid fa-envelope"></i> {{restaurant.mailAddress}}</p>
               <p><i class="fa-solid fa-phone"></i> {{restaurant.phoneNumber}}</p>
+              <button class="btn  btn-success" (click)="changeRestaurantStatusActive(restaurant)">Dükkanı Aç</button>
+              <button class="btn  btn-success" style="margin-left: 1rem;" (click)="changeRestaurantStatusPassive(restaurant)">Dükkanı Kapat</button>
+              <h2 style="margin-left: 0.1;">Dükkan durumu: {{restaurantIsOpen}}</h2>
             </div>
           </div>
 
