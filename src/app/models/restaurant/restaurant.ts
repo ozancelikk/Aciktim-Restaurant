@@ -8,4 +8,5 @@ export interface Restaurant {
     restaurantImage:string;
     phoneNumber:string;
     registerDate:string;
+    restaurantStatus:boolean;
 }

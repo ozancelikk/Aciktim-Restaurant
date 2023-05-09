@@ -16,14 +16,48 @@
                 <input type="password" class="form-control item" id="password" placeholder="Şifre Tekrarı" formControlName="password">
             </div>
             <div class="form-group">
+              <style>
+                  input[type="time"]  {
+                      border-collapse: collapse;
+                      border-radius: 10px;
+                      overflow: hidden;
+                  }
+
+                  th {
+                  border: 1px solid #ccc;
+                  padding: 10px;
+                  font-size: 12px;
+              }
+
+              td {
+                  border: 1px solid #ccc;
+                  padding: 10px;
+                  font-size: 14px;
+
+              }
+          </style>
+          <table>
+              <tr>
+                  <th>Açılış Saati</th>
+                  <th>Kapanış Saati</th>
+              </tr>
+              <tr>
+                  <td><input type="time" formControlName="openingTime" required
+                          name="pzt_acilis" step="60" /></td>
+                  <td><input type="time" formControlName="closingTime" required
+                          name="pzt_kapanis" step="60" /></td>
+              </tr>
+          </table>
+      </div>
+            <!-- <div class="form-group">
                 <input type="text" class="form-control item" id="openingTime" placeholder="openingTime" formControlName="openingTime">
-            </div>
+            </div> -->
             <div class="form-group">
                 <input type="text" class="form-control item" id="categoryId" placeholder="categoryId" formControlName="categoryId">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <input type="text" class="form-control item" id="closingTime" placeholder="closingTime" formControlName="closingTime" >
-            </div>
+            </div> -->
             <div class="form-group">
                 <input type="number" class="form-control item" id="minCartPrice" placeholder="minCartPrice" formControlName="minCartPrice">
             </div>
