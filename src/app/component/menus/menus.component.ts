@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Restaurant } from 'src/app/models/restaurant/restaurant';
@@ -23,14 +24,16 @@ export class MenusComponent implements OnInit {
   restaurantRate=new Array(0);
   remainderRate = new Array(0)
   restaurantStatus:boolean
-  restaurantIsOpen:string
-  constructor(private restaurantService:RestaurantService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService){}
+  restaurantIsOpen:string;
+  answerForm:FormGroup
+  constructor(private restaurantService:RestaurantService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private formBuilder:FormBuilder){}
   ngOnInit(): void {
     this.getRestaurantId();
     this.getRestaurantStatus();
     this.getRestaurantDetail(this.restaurantId);
     this.getRestaurantCommentsByRestaurantId();
     this.getRestaurantMenusByRestaurantId(this.restaurantId);
+    this.createAnswerForm();
     
   }
 
@@ -47,26 +50,40 @@ export class MenusComponent implements OnInit {
     this.restaurantService.getRestaurantDetails(restaurantId).subscribe(response=>{
       if (response.success) {
         this.restaurant=response.data;
-        console.log(this.restaurant)
         this.star=response.data.restaurantRate;
         this.restaurantStatus=response.data.restaurantStatus;
         this.rate=new Array(5- Math.floor(this.restaurant.restaurantRate));
         this.remainderRate=new Array(Math.floor(this.restaurant.restaurantRate))
-        console.log(this.restaurantStatus)
         this.restaurantImage=response.data.imagePath;
       }
     })
   }
   getRestaurantStatus(){
-    console.log(this.restaurantStatus);
-    
     if (this.restaurantStatus==true) {
       this.restaurantIsOpen="Açık"
     }else{
       this.restaurantIsOpen="Kapalı"
     }
   }
-
+  createAnswerForm(){
+    this.answerForm=this.formBuilder.group({
+      restaurantName:["",Validators.required],
+      customerName:["",Validators.required],
+      commentContent:["",Validators.required],
+      commentTitle:["",Validators.required],
+      commentDate:["",Validators.required],
+      restaurantRate:["",Validators.required],
+      answer:["",Validators.required],
+      customerId:["",Validators.required],
+      answerDate:[new Date().toLocaleDateString(),Validators.required],
+      restaurantId:["",Validators.required],
+      id:["",Validators.required],
+    })
+  
+  }
+  get answerFormDate(){
+    return this.answerForm.get("answerDate") as FormControl
+  }
   getImagePath(restaurantDto:RestaurantDto): string{
     let url:string
     return restaurantDto.imagePath != null ? "http://127.0.0.1:4200/Restaurant/"
@@ -108,8 +125,23 @@ export class MenusComponent implements OnInit {
       if (response.success) {
         this.comments = response.data;
         this.comments = this.comments.reverse();
+        console.log(this.comments);
       }
     })
   }
-  
+  answer(){
+    let model = Object.assign({}, this.answerForm.value);
+    this.restaurantService.restaurantUpdateComment(model).subscribe(response=>{
+      response.success ? this.toastrService.success("Yorum Başarıyla Eklendi","BAŞARILI") :this.toastrService.error("Bir Hata Meydana Geldi","HATA")
+    })
+    console.log(model);
+    
+  }
+
+  asd(comment:RestaurantComment){
+
+    this.answerForm.patchValue(comment)
+    console.log(this.answerFormDate);
+    this.answerFormDate.setValue(new Date().toLocaleDateString())
+  }
 }

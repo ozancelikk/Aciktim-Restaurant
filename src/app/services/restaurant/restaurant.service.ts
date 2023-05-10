@@ -34,5 +34,8 @@ export class RestaurantService {
   changeRestaurantStatusPassive(restaurant:RestaurantDto):Observable<Responsemodel>{
     return this.httpClient.post<Responsemodel>(this.apiURL+"/ChangeRestaurantPassiveStatus",restaurant);
   }
+  restaurantUpdateComment(model:RestaurantComment):Observable<Responsemodel>{
+    return this.httpClient.post<Responsemodel>(this.apiURL3+"/Update",model)
+  }
   
 }
