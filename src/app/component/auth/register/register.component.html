@@ -1,135 +1,211 @@
-    <div class="registration-form">
-        <form [formGroup]="registerForm">
-            <div class="form-icon">
-                <span><i class="fa-solid fa-user"></i></span>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="restaurantName" placeholder="Restoran Adı" formControlName="restaurantName">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="email" placeholder="Email" formControlName="email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Şifre" formControlName="password">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Şifre Tekrarı" formControlName="password">
-            </div>
-            <div class="form-group">
-              <style>
-                  input[type="time"]  {
-                      border-collapse: collapse;
-                      border-radius: 10px;
-                      overflow: hidden;
-                  }
-
-                  th {
-                  border: 1px solid #ccc;
-                  padding: 10px;
-                  font-size: 12px;
-              }
-
-              td {
-                  border: 1px solid #ccc;
-                  padding: 10px;
-                  font-size: 14px;
-
-              }
-          </style>
-          <table>
-              <tr>
-                  <th>Açılış Saati</th>
-                  <th>Kapanış Saati</th>
-              </tr>
-              <tr>
-                  <td><input type="time" formControlName="openingTime" required
-                          name="pzt_acilis" step="60" /></td>
-                  <td><input type="time" formControlName="closingTime" required
-                          name="pzt_kapanis" step="60" /></td>
-              </tr>
-          </table>
+<div class="registration-form">
+  <form [formGroup]="registerForm">
+    <div class="form-icon">
+      <span><i class="fa-solid fa-user"></i></span>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control item"
+        id="restaurantName"
+        placeholder="Restoran Adı"
+        formControlName="restaurantName"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control item"
+        id="email"
+        placeholder="Email"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control item"
+        id="password"
+        placeholder="Şifre"
+        formControlName="password"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control item"
+        id="password"
+        placeholder="Şifre Tekrarı"
+        formControlName="password"
+      />
+    </div>
+    <div class="form-group">
+      <div class="d-flex mb-4" style="justify-content: space-evenly;">
+      <div class="">
+        <th>Açılış Saati</th>
+        <input
+          type="time"
+          formControlName="openingTime"
+          required
+          name="pzt_acilis"
+          step="60"
+        />
       </div>
-            <!-- <div class="form-group">
+      <div class="">
+        <th>Kapanış Saati</th>
+      <input
+        type="time"
+        formControlName="closingTime"
+        required
+        name="pzt_kapanis"
+        step="60"
+      />
+      </div>
+    </div>
+    </div>
+    <!-- <div class="form-group">
                 <input type="text" class="form-control item" id="openingTime" placeholder="openingTime" formControlName="openingTime">
             </div> -->
-            <div class="form-group">
-                <input type="text" class="form-control item" id="categoryId" placeholder="categoryId" formControlName="categoryId">
-            </div>
-            <!-- <div class="form-group">
+    <div class="form-group">
+      <!-- <input
+        type="text"
+        class="form-control item"
+        id="categoryId"
+        placeholder="categoryId"
+        formControlName="categoryId"
+      /> -->
+      <label for=""> Restoran Kategorisi:</label>
+      <select formControlName="categoryId" class="form-select mb-4" style="border-radius: 1rem;">
+        <option value="{{category.id}}"*ngFor="let category of category">{{category.categoryName}}</option>
+      </select>
+    </div>
+    <!-- <div class="form-group">
                 <input type="text" class="form-control item" id="closingTime" placeholder="closingTime" formControlName="closingTime" >
             </div> -->
-            <div class="form-group">
-                <input type="number" class="form-control item" id="minCartPrice" placeholder="minCartPrice" formControlName="minCartPrice">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="phoneNumber" placeholder="phoneNumber" formControlName="phoneNumber">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="restaurantAddress" placeholder="restaurantAddress" formControlName="restaurantAddress">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="taxNumber" placeholder="taxNumber" formControlName="taxNumber">
-            </div>
-            <div class="form-group">
-              <label for="restaurantImage"> Restoran Resmini Seçiniz</label>
-              <input type="file" class="form-control item" id="image" placeholder="image"  (change)="onChange($event)">
-          </div>
-            <div class="form-check d-flex justify-content-center mb-4">
-              <input class="form-check-input me-2" type="checkbox" id="checkButton" (change)="toggleEditable()" />
-              <label class="form-check-label" for="form2Example33">
-                Bilgilendirme <button class="information" (click)="dialog.showModal()">yazısını</button> okudum ve kabul ediyorum.
-              </label>
-            </div>
-            <dialog #dialog>
-                <div class="d-flex align-items-center justify-content-center x">
-                  <div>
-                    <h2>Hizmet Anlaşması</h2>
-                    <p>
-                      1 - Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                      in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    </p>
-                    <p>
-                      2 - Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                      lacus vel augue laoreet rutrum faucibus dolor auctor.
-                    </p>
-                    <p>
-                      3 - Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                      scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                      auctor fringilla.
-                    </p>
-                    <p>
-                      4 - Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                      in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    </p>
-                    <p>
-                      5 - Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                      lacus vel augue laoreet rutrum faucibus dolor auctor.
-                    </p>
-                    <p>
-                      6 - Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                      scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                      auctor fringilla.
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <button class="close_button" (click)="dialog.close()">Tamam</button>
-                </div>
-              </dialog>
-            <div class="form-group">
-                <button type="button" class="btn btn-block create-account" (click)="register()">Hesabı Oluştur</button>
-            </div>
-            <p class="text-center text-muted mt-5 mb-0">Hesabın var mI? <a href="#!"
-                class="fw-bold text-body" routerLink="/login"><u>Hemen Giriş Yap</u></a></p>
-        </form>
-        <div class="social-media">
-            <h5>Şunlar İle Kayıt Ol</h5>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-google"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            </div>
-        </div>
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control item"
+        id="minCartPrice"
+        placeholder="minCartPrice"
+        formControlName="minCartPrice"
+      />
     </div>
-    <script src="assets/js/script.js"></script>
-
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control item"
+        id="phoneNumber"
+        placeholder="phoneNumber"
+        formControlName="phoneNumber"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control item"
+        id="restaurantAddress"
+        placeholder="restaurantAddress"
+        formControlName="restaurantAddress"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control item"
+        id="taxNumber"
+        placeholder="taxNumber"
+        formControlName="taxNumber"
+      />
+    </div>
+    <div class="form-group">
+      <label for="restaurantImage"> Restoran Resmini Seçiniz</label>
+      <input
+        type="file"
+        class="form-control item"
+        id="image"
+        placeholder="image"
+        (change)="onChange($event)"
+      />
+    </div>
+    <div class="form-check d-flex justify-content-center mb-4">
+      <input
+        class="form-check-input me-2"
+        type="checkbox"
+        id="checkButton"
+        (change)="toggleEditable()"
+      />
+      <label class="form-check-label" for="form2Example33">
+        Bilgilendirme
+        <button class="information" (click)="dialog.showModal()">
+          yazısını
+        </button>
+        okudum ve kabul ediyorum.
+      </label>
+    </div>
+    <dialog #dialog>
+      <div class="d-flex align-items-center justify-content-center x">
+        <div>
+          <h2>Hizmet Anlaşması</h2>
+          <p>
+            1 - Cras mattis consectetur purus sit amet fermentum. Cras justo
+            odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus,
+            porta ac consectetur ac, vestibulum at eros.
+          </p>
+          <p>
+            2 - Praesent commodo cursus magna, vel scelerisque nisl consectetur
+            et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+            auctor.
+          </p>
+          <p>
+            3 - Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+            dui. Donec ullamcorper nulla non metus auctor fringilla.
+          </p>
+          <p>
+            4 - Cras mattis consectetur purus sit amet fermentum. Cras justo
+            odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus,
+            porta ac consectetur ac, vestibulum at eros.
+          </p>
+          <p>
+            5 - Praesent commodo cursus magna, vel scelerisque nisl consectetur
+            et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+            auctor.
+          </p>
+          <p>
+            6 - Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+            dui. Donec ullamcorper nulla non metus auctor fringilla.
+          </p>
+        </div>
+      </div>
+      <div>
+        <button class="close_button" (click)="dialog.close()">Tamam</button>
+      </div>
+    </dialog>
+    <div class="form-group">
+      <button
+        type="button"
+        class="btn btn-block create-account"
+        (click)="register()"
+      >
+        Hesabı Oluştur
+      </button>
+    </div>
+    <p class="text-center text-muted mt-5 mb-0">
+      Hesabın var mI?
+      <a href="#!" class="fw-bold text-body" routerLink="/login"
+        ><u>Hemen Giriş Yap</u></a
+      >
+    </p>
+  </form>
+  <div class="social-media">
+    <h5>Şunlar İle Kayıt Ol</h5>
+    <div class="social-icons">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-google"></i></a>
+      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+  </div>
+</div>
+<script src="assets/js/script.js"></script>

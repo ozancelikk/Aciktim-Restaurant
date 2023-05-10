@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/models/category/category';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { RestaurantImageService } from 'src/app/services/restaurant/restaurant-image.service';
 
 @Component({
@@ -17,11 +19,13 @@ export class RegisterComponent implements OnInit {
   isChecked:boolean;
   images: any;
   restaurantId:any;
+  category:Category[];
   file: File;
-  constructor(private toastrService:ToastrService,private authService:AuthService, private formBuilder:FormBuilder,private router:Router,private restaurantImageService:RestaurantImageService){}
+  constructor(private toastrService:ToastrService,private authService:AuthService, private formBuilder:FormBuilder,private router:Router,private restaurantImageService:RestaurantImageService,private categoryService:CategoryService){}
 
   ngOnInit(): void {
     this.createRegisterForm();
+    this.categoryGetAll();
   }
   createRegisterForm(){
     this.registerForm=this.formBuilder.group({
@@ -65,7 +69,7 @@ export class RegisterComponent implements OnInit {
               this.router.navigate(["login"]);
             }, 2700)
           },errResponse=>{
-            console.log(errResponse);
+            this.toastrService.error(errResponse.error)
           })
         }else{
           this.toastrService.error("Lütfen bilgilendirme yazısını okuyup kabul ediniz.","HATA")
@@ -84,5 +88,10 @@ export class RegisterComponent implements OnInit {
 
   onChange(event:any) {
     this.file = event.target?.files[0];
+  }
+  categoryGetAll(){
+    this.categoryService.getAll().subscribe(response=>{
+      response.success ? this.category=response.data : this.toastrService.error("Bir Hata Meydana Geldi");
+    })
   }
 }

@@ -72,12 +72,6 @@ export class MenusComponent implements OnInit {
     return restaurantDto.imagePath != null ? "http://127.0.0.1:4200/Restaurant/"
       + restaurantDto.id + "/" + restaurantDto.imagePath : "http://127.0.0.1:4200/Restaurant/noImage.png";
   }
-
-
-
-
-
-
   changeRestaurantStatusActive(restaurant:RestaurantDto){
     this.restaurantService.changeRestaurantStatusActive(restaurant).subscribe(response=>{
       if (response.success) {
@@ -96,19 +90,6 @@ export class MenusComponent implements OnInit {
       }
     })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   getRestaurantMenusByRestaurantId(restaurantId:string){
     this.restaurantService.getRestaurantMenusByRestaurantId(restaurantId).subscribe(response=>{
