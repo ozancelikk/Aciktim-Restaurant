@@ -78,34 +78,73 @@
           <div class="alert alert-success" role="alert" *ngIf="comments.length == 0">
             Bu restorana daha önce hiç yorum yapılmamış!
           </div>
-          <div class="card w-100 p-1" *ngIf="comments.length > 0">
-            <div class="comment-widgets m-b-20">
-              <div class="d-flex flex-row comment-row w-100" *ngFor="let comment of comments">
-                <div class="p-2"><span class="round"><img
-                      src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1"
-                      alt="user" width="50"></span></div>
-                <div class="comment-text w-100">
-                  <h4 style="margin-bottom: .3rem;">{{comment.customerName.slice(0,1)}}*****</h4>
-                  <div class="comment-footer mb-2">
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        <small>
-                          <i class="fa-solid fa-star stars" *ngFor="let x of getRate(comment.restaurantRate)"></i>
-                        </small>
-                        <br>
-                        <span class="date" style="font-weight: bold;">Başlık : {{comment.commentTitle}}</span>
+          <section class="gradient-custom w-100">
+            <div class="w-100">
+              <div class="row">
+                <div class="col-md-12 col-lg-12 col-xl-12" *ngFor="let comment of comments">
+                  <div class="card">
+                    <div class="card-body p-4">
+                      <div class="row">
+                        <div class="col">
+                          <div class="d-flex flex-start">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                              src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png" alt="avatar" width="65"
+                              height="65" />
+                            <div class="flex-grow-1 flex-shrink-1">
+                              <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <p class="mb-1" style="font-weight: bold;">
+                                    {{comment.customerName.slice(0,1)}}***** <span class="small">-  {{comment.commentDate}}</span>
+                                  </p>
+                                </div>
+                                <p class="small mb-0">
+                                  {{comment.commentContent}}
+                                </p>
+                              </div>
+          
+                              <div class="d-flex flex-start mt-4" *ngIf="comment.answer!=null  ">
+                                <a class="me-3" href="#">
+                                  <img class="rounded-circle shadow-1-strong"
+                                    src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png" alt="avatar"
+                                    width="65" height="65" />
+                                </a>
+                                <div class="flex-grow-1 flex-shrink-1">
+                                  <div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                      <p class="mb-1">
+                                        {{comment.restaurantName}} <span class="small">- {{comment.answerDate}}</span>
+                                      </p>
+                                    </div>
+                                    <p class="small mb-0">
+                                      {{comment.answer}}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-start mt-4 " *ngIf="comment.answer==null">
+                                <div class="flex-grow-1 flex-shrink-1">
+                                  <div>
+                                    <h3>Cevapla: </h3>
+                                    <div class="form-outline w-100 mb-4">
+                                      <form [formGroup]="answerForm">
+                                        <input type="text" style="display: none;"formControlName="restaurantName" value="{{comment.restaurantName}}">
+                                      <textarea (click)="asd(comment)" class="form-control" formControlName="answer" id="textAreaExample5" rows="2"></textarea>
+                                    </form>
+                                    </div>
+                                    <button (click)="answer()" class="btn btn-success">Gönder</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
                       </div>
-                      <span>Paylaşıldı {{comment.commentDate}}</span>
                     </div>
                   </div>
-                  <p class="m-b-5 m-t-10">
-                    <b> İçerik :</b> {{comment.commentContent}}
-                  </p>
-                  <hr>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -113,28 +152,3 @@
 </div>
 
 
-<!-- 
-<div class="row mb-3">
-      <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item"
-        *ngFor="let menu of restaurantMenuDetails|menuPipe:filtered" style="position: relative;">
-        <button class="btn addCart" (click)="addCart(menu)">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-        <div class="card">
-          <img class="card-img-top" [src]="getMenusImagePath(menu)" style="height:17rem;width: 100%; max-height: 17rem;"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title" style="font-weight: bold;">{{menu.menuTitle.charAt(0).toUpperCase() +
-              menu.menuTitle.slice(1)}}</h4>
-            <div class="d-flex justify-content-between">
-              <p class="card-text">{{menu.menuDescription.charAt(0).toUpperCase() + menu.menuDescription.slice(1)}}</p>
-              <p class="card-price">{{menu.menuPrice}} TL </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
- -->
