@@ -133,3 +133,8 @@ dialog {
     background-color: #5D196A;
     color: white;
  }
+ input[type="time"] {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+  }
