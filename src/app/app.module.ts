@@ -24,6 +24,7 @@ import { ChartModule } from 'angular-highcharts';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RestaurantApplicationComponent } from './component/restaurant-application/restaurant-application.component';
 import { OrderComponent } from './component/order/order.component';
+import { RestaurantMenuPipePipe } from './pipes/restaurant-menu-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { OrderComponent } from './component/order/order.component';
     OrderCustomerIdPipe,
     RestaurantApplicationComponent,
     OrderComponent,
+    RestaurantMenuPipePipe,
   ],
   imports: [
     BrowserModule,
