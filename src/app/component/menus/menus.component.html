@@ -9,7 +9,6 @@
       <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="search">
           <h2>{{restaurant.restaurantName.toUpperCase()}}</h2>
-          <div class="row">
             <div class="col-md-6">
               <p><i class="fa-solid fa-house"></i>
                 {{restaurant.restaurantAddress.charAt(0).toUpperCase() + restaurant.restaurantAddress.slice(1)}}
@@ -23,38 +22,26 @@
               </p>
               <p *ngIf="restaurant.restaurantRate==0" style="color: #5e196b; font-weight: bold;">Henüz Puanlanlama Yaplımamıştır</p>
             </div>
-            <div class="col-md-6">
-              <p><i class="fa-solid fa-envelope"></i> {{restaurant.mailAddress}}</p>
-              <p><i class="fa-solid fa-phone"></i> {{restaurant.phoneNumber}}</p>
-              <button class="btn  btn-success" (click)="changeRestaurantStatusActive(restaurant)">Dükkanı Aç</button>
-              <button class="btn  btn-success" style="margin-left: 1rem;" (click)="changeRestaurantStatusPassive(restaurant)">Dükkanı Kapat</button>
-              <h2 style="margin-left: 0.1;">Dükkan durumu: {{restaurantIsOpen}}</h2>
-            </div>
-          </div>
-
         </div>
       </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <h4 class="filterText mb-3 p-2" style="border-radius: 5px;">Filtreler</h4>
-        <div class="container filter">
-          <h4 style="margin-left: 1rem;font-weight: bold;">Restoran Menüleri</h4>
-          <ul class="filter_list">
-
-            <mat-radio-button value="1">Burger</mat-radio-button>
-            <mat-radio-button value="2">Yan Soslar</mat-radio-button>
-            <mat-radio-button value="2">İçecek</mat-radio-button>
-            <mat-radio-button value="2">Tatlı</mat-radio-button>
-          </ul>
+      <div class="col-lg-6">
+        <div>
+          <p><i class="fa-solid fa-envelope"></i> {{restaurant.mailAddress}}</p>
+          <p><i class="fa-solid fa-phone"></i> {{restaurant.phoneNumber}}</p>
+          <button class="btn  btn-success" (click)="changeRestaurantStatusActive(restaurant)">Dükkanı Aç</button>
+          <button class="btn  btn-success" style="margin-left: 1rem;" (click)="changeRestaurantStatusPassive(restaurant)">Dükkanı Kapat</button>
+          <h2 style="margin-left: 0.1;">Dükkan durumu: {{restaurantIsOpen}}</h2>
         </div>
       </div>
+      
     </div>
     <div class="input-group mb-3 mt-3">
-      <input type="text" class="form-control"  placeholder="Restoran İçi Menü Arama..."
+      <input type="text" [(ngModel)]="filter" class="form-control"  placeholder="Restoran İçi Menü Arama..."
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="row mb-3">
       <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 item"
-        *ngFor="let menu of restaurantMenuDetails" style="position: relative;">
+        *ngFor="let menu of restaurantMenuDetails |restaurantMenuPipe:filter" style="position: relative;">
         <div class="card">
           <img class="card-img-top" [src]="getMenusImagePath(menu)" style="height:17rem;width: 100%; max-height: 17rem;"
             alt="Card image cap">
@@ -102,7 +89,7 @@
                                 </p>
                               </div>
           
-                              <div class="d-flex flex-start mt-4" *ngIf="comment.answer!=null  ">
+                              <div class="d-flex flex-start mt-4" *ngIf="comment.answer!=''">
                                 <a class="me-3" href="#">
                                   <img class="rounded-circle shadow-1-strong"
                                     src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png" alt="avatar"
@@ -121,14 +108,14 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="d-flex flex-start mt-4 " *ngIf="comment.answer==null">
+                              <div class="d-flex flex-start mt-4 " *ngIf="comment.answer==''">
                                 <div class="flex-grow-1 flex-shrink-1">
                                   <div>
                                     <h3>Cevapla: </h3>
                                     <div class="form-outline w-100 mb-4">
                                       <form [formGroup]="answerForm">
                                         <input type="text" style="display: none;"formControlName="restaurantName" value="{{comment.restaurantName}}">
-                                      <textarea (click)="asd(comment)" class="form-control" formControlName="answer" id="textAreaExample5" rows="2"></textarea>
+                                      <textarea (click)="commentAnswerPatch(comment)" class="form-control" formControlName="answer" id="textAreaExample5" rows="2"></textarea>
                                     </form>
                                     </div>
                                     <button (click)="answer()" class="btn btn-success">Gönder</button>

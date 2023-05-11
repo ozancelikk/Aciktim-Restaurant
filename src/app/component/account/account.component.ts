@@ -76,9 +76,7 @@ export class AccountComponent implements OnInit {
     this.authservice.getById(this.restaurantId).subscribe(response=>{
       if (response.success) {
         this.restaurant=response.data
-        this.mailAddress=response.data.mailAddress
-        console.log(response.data);
-        
+        this.mailAddress=response.data.mailAddress       
       }
     })
   }

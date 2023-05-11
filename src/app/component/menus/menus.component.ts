@@ -19,6 +19,7 @@ export class MenusComponent implements OnInit {
   rate=new Array(0);
   restaurantMenuDetails:RestaurantMenu[];
   restaurantId:any;
+  filter:string
   restaurantImage:string;
   comments:RestaurantComment[];
   restaurantRate=new Array(0);
@@ -133,15 +134,16 @@ export class MenusComponent implements OnInit {
     let model = Object.assign({}, this.answerForm.value);
     this.restaurantService.restaurantUpdateComment(model).subscribe(response=>{
       response.success ? this.toastrService.success("Yorum Başarıyla Eklendi","BAŞARILI") :this.toastrService.error("Bir Hata Meydana Geldi","HATA")
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     })
     console.log(model);
     
   }
 
-  asd(comment:RestaurantComment){
-
+  commentAnswerPatch(comment:RestaurantComment){
     this.answerForm.patchValue(comment)
-    console.log(this.answerFormDate);
     this.answerFormDate.setValue(new Date().toLocaleDateString())
   }
 }
