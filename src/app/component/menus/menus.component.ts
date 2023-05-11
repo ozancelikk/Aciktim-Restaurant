@@ -29,12 +29,12 @@ export class MenusComponent implements OnInit {
   constructor(private restaurantService:RestaurantService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private formBuilder:FormBuilder){}
   ngOnInit(): void {
     this.getRestaurantId();
-    this.getRestaurantStatus();
+
     this.getRestaurantDetail(this.restaurantId);
     this.getRestaurantCommentsByRestaurantId();
     this.getRestaurantMenusByRestaurantId(this.restaurantId);
-    this.createAnswerForm();
-    
+    this.getRestaurantStatus();
+    this.createAnswerForm();  
   }
 
   getRate(element:number){
@@ -45,8 +45,7 @@ export class MenusComponent implements OnInit {
     this.restaurantId = localStorage.getItem("restaurantId")
   }
 
-  getRestaurantDetail(restaurantId:string){
-    
+  getRestaurantDetail(restaurantId:string,successCallBack?:()=>void){ 
     this.restaurantService.getRestaurantDetails(restaurantId).subscribe(response=>{
       if (response.success) {
         this.restaurant=response.data;
@@ -55,15 +54,21 @@ export class MenusComponent implements OnInit {
         this.rate=new Array(5- Math.floor(this.restaurant.restaurantRate));
         this.remainderRate=new Array(Math.floor(this.restaurant.restaurantRate))
         this.restaurantImage=response.data.imagePath;
+        if(successCallBack) {
+          successCallBack();
+        }
       }
     })
   }
   getRestaurantStatus(){
-    if (this.restaurantStatus==true) {
-      this.restaurantIsOpen="Açık"
-    }else{
-      this.restaurantIsOpen="Kapalı"
-    }
+    this.getRestaurantDetail(this.restaurantId,()=>{
+      if (this.restaurantStatus==true) {
+        this.restaurantIsOpen="Açık"
+      }else{
+        this.restaurantIsOpen="Kapalı"
+      }
+    })
+    
   }
   createAnswerForm(){
     this.answerForm=this.formBuilder.group({
