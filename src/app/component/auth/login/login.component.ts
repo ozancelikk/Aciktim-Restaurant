@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             , 500);
         }
       },errResponse=>{
-        this.toastrService.error(errResponse.error)
+        this.toastrService.error("E-Posta Veya Şifreniz Yanlıştır")
       })
     }
     else{
