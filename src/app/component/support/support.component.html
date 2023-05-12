@@ -88,24 +88,22 @@
                 </div>
               </div>
               <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-                <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+                <form [formGroup]="form" class="signin-form">
                   <div class="input-grids">
+                   
                     <div class="form-group">
-                      <input type="text" name="w3lName" id="w3lName" placeholder="İsminiz*" class="contact-input" />
-                    </div>
-                    <div class="form-group">
-                      <input type="email" name="w3lSender" id="w3lSender" placeholder="E Postanız*" class="contact-input"
+                      <input type="email" name="w3lSender" id="w3lSender" placeholder="E Postanız*" formControlName="mail" class="contact-input"
                         required="" />
                     </div>
                     <div class="form-group">
-                      <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Konu*" class="contact-input" />
+                      <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Konu*" formControlName="subject" class="contact-input" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <textarea name="w3lMessage" id="w3lMessage" placeholder="Mesajınızı yazınız*" required=""></textarea>
+                    <textarea name="w3lMessage" id="w3lMessage" placeholder="Mesajınızı yazınız*" formControlName="content" required=""></textarea>
                   </div>
                   <div class="d-flex" style="justify-content: end;">
-                      <button class="btn btn-style send_button">Mesaj Gönder</button>
+                      <button (click)="addMail()" class="btn btn-style send_button">Mesaj Gönder</button>
                   </div>
                 </form>
               </div>
