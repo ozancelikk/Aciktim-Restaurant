@@ -26,6 +26,8 @@ import { RestaurantApplicationComponent } from './component/restaurant-applicati
 import { OrderComponent } from './component/order/order.component';
 import { RestaurantMenuPipePipe } from './pipes/restaurant-menu-pipe.pipe';
 
+import { RestaurantOrderMenuNamePipePipe } from './pipes/restaurant-order-menu-name-pipe.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,7 @@ import { RestaurantMenuPipePipe } from './pipes/restaurant-menu-pipe.pipe';
     RestaurantApplicationComponent,
     OrderComponent,
     RestaurantMenuPipePipe,
+    RestaurantOrderMenuNamePipePipe,
   ],
   imports: [
     BrowserModule,

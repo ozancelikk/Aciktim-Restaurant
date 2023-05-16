@@ -40,5 +40,14 @@ export class OrderService {
     return this.httpClient.get<SingleResponseModel<OrdersByDate>>(this.apiUrl+ "/GetYesterdayOrdersByRestaurantId?restaurantId="+restaurantId);
   }
 
+
+  getRestaurantActiveOrderDetailsByDate(start:string,end:string,restaurantId:string):Observable<ListResponseModel<Order>> {
+    return this.httpClient.get<ListResponseModel<Order>>(this.apiUrl +"/GetRestaurantActiveOrderDetailsByDate?start=" +start + "&end=" + end +"&restaurantId=" + restaurantId)
+  } 
+
+  getRestaurantPassiveOrderDetailsByDate(start:string,end:string,restaurantId:string):Observable<ListResponseModel<Order>> {
+    return this.httpClient.get<ListResponseModel<Order>>(this.apiUrl +"/GetRestaurantPassiveOrderDetailsByDate?start=" +start + "&end=" + end +"&restaurantId=" + restaurantId)
+  } 
+  
   
 }
