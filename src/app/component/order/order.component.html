@@ -4,16 +4,55 @@
             <h4 style="font-weight: bold;color: #5D196A;">Aktif Siparişleri
             </h4>
             <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button (click)="getActiveOrdersByRestaurantId()" class="btn btn-xs" style="margin-bottom: 1rem;background-color: #5D196A;color: white;">Tüm Aktif
+                            Siparişler İçin Tıkla</button>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center">
+                           <p style="font-weight: bold;">VEYA</p>
+                        </div>
+                    </div>
+                    <form>
+                        <label for="birthday">Başlangıç Tarihi : </label>
+                        <input [(ngModel)]="start" type="date" style="margin-left: .4rem;" id="birthday" name="birthday">
+            
+                        <label style="margin-left: 3rem;" for="birthday">Bitiş Tarihi : </label>
+                        <input [(ngModel)]="end" type="date" style="margin-left: .4rem;" id="birthday" name="birthday">
+            
+                        <button (click)="getRestaurantActiveOrderDetailsByDate(start,end)" style="margin-left:1rem;background-color: #5D196A;color: white;"
+                            class="btn" >Tarihe Göre Ara</button>
+                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p style="font-weight: bold;">VEYA</p>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                            <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Müşteri ID'Ye Göre Eski
+                                Sipariş
+                                Ara</label>
+                            <input [(ngModel)]="activeText" type="email" class="form-control mb-3" id="exampleFormControlInput1"
+                                placeholder="Müşteri ID'si">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Menü İsmine Göre Aktif
+                                Sipariş
+                                Ara</label>
+                            <input [(ngModel)]="activeOrderMenuName" type="email" class="form-control mb-3" id="exampleFormControlInput1"
+                                placeholder="Menü İsmi">
+                        </div>
+                     </div>
+                    
+                </div>
+            </div>
             <div *ngIf="activeOrders">
-                <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Müşteri ID'Ye Göre Eski
-                    Sipariş
-                    Ara</label>
-                <input [(ngModel)]="activeText" type="email" class="form-control mb-3" id="exampleFormControlInput1"
-                    placeholder="Müşteri ID'si">
+                
                 <div *ngIf="activeOrders?.length == 0" class="alert alert-danger col-lg-12" role="alert">
                     Restoranın Aktif Siparişi bulunmamaktadır!
                 </div>
-                <section class="mb-5" *ngFor="let order of activeOrders|orderCustomerId:activeText">
+                <section class="mb-5" *ngFor="let order of activeOrders|orderCustomerId:activeText|restaurantOrderMenuNamePipe:activeOrderMenuName">
                     <div class="container h-100">
                         <div class="row d-flex justify-content-center  h-100">
                             <div class="col-12">
@@ -93,19 +132,59 @@
                 </h4>
             </div>
             <hr>
-            <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Müşteri ID'Ye Göre Eski
-                Sipariş
-                Ara</label>
-            <input [(ngModel)]="passiveText" type="email" class="form-control mb-3" id="exampleFormControlInput1"
-                placeholder="Müşteri ID">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button (click)="getPassiveOrdersByRestaurantId()" class="btn btn-xs" style="margin-bottom: 1rem;background-color: #5D196A;color: white;">Tüm Pasif
+                            Siparişler İçin Tıkla</button>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center">
+                           <p style="font-weight: bold;">VEYA</p>
+                        </div>
+                    </div>
+                    <form>
+                        <label for="birthday">Başlangıç Tarihi : </label>
+                        <input [(ngModel)]="startPast" type="date" style="margin-left: .4rem;" id="birthday" name="birthday">
+            
+                        <label style="margin-left: 3rem;" for="birthday">Bitiş Tarihi : </label>
+                        <input [(ngModel)]="endPast" type="date" style="margin-left: .4rem;" id="birthday" name="birthday">
+            
+                        <button (click)="getRestaurantPassiveOrderDetailsByDate(startPast,endPast)" style="margin-left:1rem;background-color: #5D196A;color: white;"
+                            class="btn" >Tarihe Göre Ara</button>
+                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p style="font-weight: bold;">VEYA</p>
+                     </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Müşteri ID'Ye Göre Eski
+                        Sipariş
+                        Ara</label>
+                    <input [(ngModel)]="passiveText" type="email" class="form-control mb-3" id="exampleFormControlInput1"
+                        placeholder="Müşteri ID">
+                </div>
+                <div class="col-lg-6">
+                    <label class="mb-2" for="exampleFormControlInput1" style="font-weight: bold;">Menü İsmine Göre Eski
+                        Sipariş
+                        Ara</label>
+                    <input [(ngModel)]="passiveOrderMenuName" type="email" class="form-control mb-3" id="exampleFormControlInput1"
+                        placeholder="Menü İsmi">
+                </div>
+            </div>
+           
             <div class="alert alert-danger" role="alert" *ngIf="passiveOrders.length == 0">
                 Restoranın Geçmiş Siparişi Bulunmamaktadır.
             </div>
+            
             <div class="container-fluid d-flex justify-content-center" style="margin-top: 0px;" class="mb-4">
                 <div class="card-1">
                     <div class="card-body">
                         <div class="row">
-                            <div class="mb-4" *ngFor="let order of passiveOrders|orderCustomerId:passiveText">
+                            <div class="mb-4" *ngFor="let order of passiveOrders|orderCustomerId:passiveText|restaurantOrderMenuNamePipe:passiveOrderMenuName">
                                 <div class="col">
                                     <div class="card border_bottom_none">
                                         <div class="card-body">

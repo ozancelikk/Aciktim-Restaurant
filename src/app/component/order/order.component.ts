@@ -16,7 +16,16 @@ export class OrderComponent implements OnInit {
   passiveText:string;
   activeText:string;
   restaurantId:any;
-  restaurant:Restaurant
+  restaurant:Restaurant;
+  start:string;
+  end:string;
+  filter:string;
+  startPast:string;
+  endPast:string;
+
+  activeOrderMenuName:string;
+  passiveOrderMenuName:string;
+
   constructor(private toastrService:ToastrService,private orderService:OrderService,private route:ActivatedRoute){}
   ngOnInit(): void {
     this.getRestaurantId();
@@ -39,6 +48,8 @@ export class OrderComponent implements OnInit {
     this.orderService.getPassiveOrderDetailsByRestaurantId(this.restaurantId).subscribe(response=>{
       if (response.success) {
         this.passiveOrders=response.data;
+        console.log(this.passiveOrders);
+        
       }
     })
   }
@@ -69,5 +80,37 @@ export class OrderComponent implements OnInit {
         this.getPassiveOrdersByRestaurantId();
       }
     })
+  }
+
+  getRestaurantActiveOrderDetailsByDate(start:string,end:string) {
+    const startDate = new Date(start);
+    start= startDate.toLocaleDateString("tr-TR").toString();
+    const endDate = new Date(end);
+    end= endDate.toLocaleDateString("tr-TR").toString();
+    if(isNaN(startDate.getTime()) || isNaN(endDate.getTime()) ) {
+      this.toastrService.error("Lütfen ilgili tarih aralığını giriniz","HATA");
+    }
+    else {
+      this.orderService.getRestaurantActiveOrderDetailsByDate(start,end,this.restaurantId).subscribe(response=>{
+        response.success ? this.activeOrders = response.data : this.toastrService.error("Bir Hata Meydana Geldi","HATA");
+        console.log(this.activeOrders);   
+      })
+    }
+  }
+
+  getRestaurantPassiveOrderDetailsByDate(start:string,end:string) {
+    const startDate = new Date(start);
+    start= startDate.toLocaleDateString("tr-TR").toString();
+    const endDate = new Date(end);
+    end= endDate.toLocaleDateString("tr-TR").toString();
+    if(isNaN(startDate.getTime()) || isNaN(endDate.getTime()) ) {
+      this.toastrService.error("Lütfen ilgili tarih aralığını giriniz","HATA");
+    }
+    else {
+      this.orderService.getRestaurantActiveOrderDetailsByDate(start,end,this.restaurantId).subscribe(response=>{
+        response.success ? this.passiveOrders = response.data : this.toastrService.error("Bir Hata Meydana Geldi","HATA");
+        console.log(this.activeOrders);   
+      })
+    }
   }
 }
