@@ -7,7 +7,7 @@ import { Order } from '../models/order/order';
 export class OrderCustomerIdPipe implements PipeTransform {
 
   transform(value: Order[],  filter:string): Order[] {
-    return filter ? value.filter(x=>x.customerId.toLowerCase().indexOf(filter.toLowerCase())!== -1): value;
+    return filter ? value.filter(x=>x.id.toLowerCase().indexOf(filter.toLowerCase())!== -1): value;
   }
 
 }

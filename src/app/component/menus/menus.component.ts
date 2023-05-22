@@ -6,6 +6,7 @@ import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { RestaurantComment } from 'src/app/models/restaurant/restaurantComment';
 import { RestaurantDto } from 'src/app/models/restaurant/restaurantDto';
 import { RestaurantMenu } from 'src/app/models/restaurant/restaurantMenu';
+import { MenuService } from 'src/app/services/menu/menu.service';
 import { RestaurantService } from 'src/app/services/restaurant/restaurant.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class MenusComponent implements OnInit {
   restaurantStatus:boolean
   restaurantIsOpen:string;
   answerForm:FormGroup
-  constructor(private restaurantService:RestaurantService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private formBuilder:FormBuilder){}
+  constructor(private restaurantService:RestaurantService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private formBuilder:FormBuilder,private menuService:MenuService){}
   ngOnInit(): void {
     this.getRestaurantId();
 
@@ -143,12 +144,24 @@ export class MenusComponent implements OnInit {
         window.location.reload();
       }, 500);
     })
-    console.log(model);
+  
     
   }
 
   commentAnswerPatch(comment:RestaurantComment){
     this.answerForm.patchValue(comment)
     this.answerFormDate.setValue(new Date().toLocaleDateString())
+  }
+
+  menuDelete(id:string){
+    this.menuService.delete(id).subscribe(response=>{
+      if (response.success) {
+        this.toastrService.success("Menü Başarıyla Silindi") 
+        this.getRestaurantMenusByRestaurantId(this.restaurantId);
+      }
+      else{
+        this.toastrService.error("Bir Hata Meydana Geldi")
+      }
+    })
   }
 }
