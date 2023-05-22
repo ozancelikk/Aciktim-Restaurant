@@ -22,7 +22,6 @@ export class OrderComponent implements OnInit {
   filter:string;
   startPast:string;
   endPast:string;
-
   activeOrderMenuName:string;
   passiveOrderMenuName:string;
 

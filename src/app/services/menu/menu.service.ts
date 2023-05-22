@@ -17,4 +17,8 @@ export class MenuService {
   add(menu:Menu):Observable<SingleResponseModel<string>>{
     return this.httpClient.post<SingleResponseModel<string>>(this.apiUrl+"/AddMenuWithImage",menu)
   }
+
+  delete(id:string):Observable<Responsemodel>{
+    return this.httpClient.get<Responsemodel>(this.apiUrl+"/Delete?id="+id)
+  }
 }

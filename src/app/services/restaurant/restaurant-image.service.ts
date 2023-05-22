@@ -31,4 +31,5 @@ export class RestaurantImageService {
   getImagesByRestaurantId(id:string):Observable<ListResponseModel<RestaurantImageDto>>{
     return this.httpClient.get<ListResponseModel<RestaurantImageDto>>(this.apiUrl+"/GetImagesByRestaurantId?restaurantId="+id)
   }
+  
 }
